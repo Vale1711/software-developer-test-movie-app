@@ -64,3 +64,148 @@ When delivering the solution, please keep in mind the following practices:
 * You MUST create a new branch named `feature/{first-name}-{last-name}-task-list`.
 * You MUST assign a pull request from your new branch to the original project.
 * The solution must be written in English.
+
+# Cinema Booking System – Software Developer Design Test
+
+## Overview
+This document presents the design of a Cinema Booking System for a major cinema chain in Santander, Spain.  
+The objective of this system is to allow customers to search for movie screenings, reserve seats, manage their bookings, and cancel reservations.
+
+This solution focuses exclusively on **software design** and does not include any technical implementation.
+
+---
+
+## Entity Relationship Diagram (ERD)
+
+```mermaid
+erDiagram
+    USER ||--o{ BOOKING : makes
+    MOVIE ||--o{ SCREENING : has
+    SCREEN ||--o{ SCREENING : hosts
+    SCREENING ||--o{ BOOKING : generates
+    SCREENING ||--o{ SEAT : contains
+    BOOKING ||--o{ BOOKING_SEAT : includes
+    SEAT ||--o{ BOOKING_SEAT : reserved_in
+
+    USER {
+        int id
+        string name
+        string email
+        string password
+        string cellphone
+    }
+
+    MOVIE {
+        int id
+        string title
+        string description
+        int duration
+    }
+
+    SCREEN {
+        int id
+        string name
+        int capacity
+    }
+
+    SCREENING {
+        int id
+        datetime startTime
+        datetime endTime
+        int movieId
+        int screenId
+    }
+
+    SEAT {
+        int id
+        string seatNumber
+        string status
+    }
+
+    BOOKING {
+        int id
+        datetime bookingDate
+        string status
+        int userId
+        int screeningId
+    }
+
+    BOOKING_SEAT {
+        int bookingId
+        int seatId
+    }
+
+---
+
+
+
+```md
+## Class Diagram
+
+```mermaid
+classDiagram
+    class User {
+        +register()
+        +login()
+        +viewBookings()
+    }
+
+    class Movie {
+        +addMovie()
+        +updateMovie()
+        +deleteMovie()
+    }
+
+    class Screening {
+        +scheduleScreening()
+        +getAvailableSeats()
+    }
+
+    class Seat {
+        +reserve()
+        +release()
+    }
+
+    class Booking {
+        +createBooking()
+        +cancelBooking()
+    }
+
+    User --> Booking
+    Movie --> Screening
+    Screening --> Seat
+    Booking --> Seat
+
+---
+
+
+
+```md
+## Sequence Diagram – Cancellation of a Reservation
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant Booking
+    participant Seat
+
+    User->>System: Request booking cancellation
+    System->>Booking: Cancel booking
+    Booking->>Seat: Release seats
+    Booking-->>User: Cancellation confirmed
+
+---
+
+
+
+```md
+## State Diagram – Booking and Seat Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Available
+    Available --> Reserved : Seat selected
+    Reserved --> Booked : Payment confirmed
+    Booked --> Cancelled : Booking cancelled
+    Cancelled --> Available : Seat released
