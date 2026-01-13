@@ -134,7 +134,8 @@ erDiagram
         int bookingId
         int seatId
     }
-
+```
+```mermaid
 classDiagram
 class User
 User : +register()
@@ -162,8 +163,8 @@ User --> Booking
 Movie --> Screening
 Screening --> Seat
 Booking --> Seat
-
-
+```
+```mermaid
 sequenceDiagram
     participant User
     participant System
@@ -174,10 +175,14 @@ sequenceDiagram
     System->>Booking: Cancel booking
     Booking->>Seat: Release seats
     Booking-->>User: Cancellation confirmed
+```
 
+```mermaid
 stateDiagram-v2
     [*] --> Available
     Available --> Reserved : Seat selected
     Reserved --> Booked : Payment confirmed
     Booked --> Cancelled : Booking cancelled
     Cancelled --> Available : Seat released
+```
+
