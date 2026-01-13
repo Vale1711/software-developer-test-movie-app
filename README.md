@@ -75,7 +75,7 @@ This solution focuses exclusively on **software design** and does not include an
 
 ---
 
-## Entity Relationship Diagram (ERD)
+# Entity Relationship Diagram (ERD)
 
 ```mermaid
 erDiagram
@@ -134,15 +134,6 @@ erDiagram
         int bookingId
         int seatId
     }
-
----
-
-
-
-```md
-## Class Diagram
-
-```mermaid
 classDiagram
     class User {
         +register()
@@ -175,15 +166,6 @@ classDiagram
     Movie --> Screening
     Screening --> Seat
     Booking --> Seat
-
----
-
-
-
-```md
-## Sequence Diagram – Cancellation of a Reservation
-
-```mermaid
 sequenceDiagram
     participant User
     participant System
@@ -194,15 +176,6 @@ sequenceDiagram
     System->>Booking: Cancel booking
     Booking->>Seat: Release seats
     Booking-->>User: Cancellation confirmed
-
----
-
-
-
-```md
-## State Diagram – Booking and Seat Lifecycle
-
-```mermaid
 stateDiagram-v2
     [*] --> Available
     Available --> Reserved : Seat selected
