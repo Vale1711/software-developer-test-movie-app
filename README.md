@@ -166,6 +166,7 @@ classDiagram
     Movie --> Screening
     Screening --> Seat
     Booking --> Seat
+
 sequenceDiagram
     participant User
     participant System
@@ -176,6 +177,7 @@ sequenceDiagram
     System->>Booking: Cancel booking
     Booking->>Seat: Release seats
     Booking-->>User: Cancellation confirmed
+
 stateDiagram-v2
     [*] --> Available
     Available --> Reserved : Seat selected
