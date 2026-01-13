@@ -134,38 +134,35 @@ erDiagram
         int bookingId
         int seatId
     }
+
 classDiagram
-    class User {
-        +register()
-        +login()
-        +viewBookings()
-    }
+class User
+User : +register()
+User : +login()
+User : +viewBookings()
 
-    class Movie {
-        +addMovie()
-        +updateMovie()
-        +deleteMovie()
-    }
+class Movie
+Movie : +addMovie()
+Movie : +updateMovie()
+Movie : +deleteMovie()
 
-    class Screening {
-        +scheduleScreening()
-        +getAvailableSeats()
-    }
+class Screening
+Screening : +scheduleScreening()
+Screening : +getAvailableSeats()
 
-    class Seat {
-        +reserve()
-        +release()
-    }
+class Seat
+Seat : +reserve()
+Seat : +release()
 
-    class Booking {
-        +createBooking()
-        +cancelBooking()
-    }
+class Booking
+Booking : +createBooking()
+Booking : +cancelBooking()
 
-    User --> Booking
-    Movie --> Screening
-    Screening --> Seat
-    Booking --> Seat
+User --> Booking
+Movie --> Screening
+Screening --> Seat
+Booking --> Seat
+
 
 sequenceDiagram
     participant User
